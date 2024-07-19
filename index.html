@@ -596,19 +596,13 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/js/lightbox.min.js"></script>
 
 
-  <script>
+<script>
         // Ambil elemen audio
         var audio = document.getElementById("myAudio");
 
-        // Event listener untuk memastikan lagu diputar ulang ketika selesai
-        audio.addEventListener('ended', function() {
-            audio.currentTime = 0; // Set ulang waktu pemutaran ke awal
-            audio.play(); // Mulai lagu lagi
-        });
-
-        // Panggil fungsi untuk memastikan lagu dimainkan ketika halaman dimuat
-        window.onload = function() {
-            audio.play(); // Memastikan lagu dimainkan saat halaman dimuat
+        // Event listener untuk memastikan lagu dimainkan
+        audio.oncanplay = function() {
+            audio.play();
         };
     </script>
 </body>
