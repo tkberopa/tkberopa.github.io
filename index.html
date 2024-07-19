@@ -101,10 +101,10 @@
           <h1 data-aos="fade-up">Welcome to <span>TK Beropa</span></h1>
           <p data-aos="fade-up" data-aos-delay="100">Membantu anak didik mengembangkan berbagai potensi yang dimiliki
             untuk siap memasuki pendidikan dasar melalui kegiatan bermain sambil belajar<br></p>
-          <div class="d-flex" data-aos="fade-up" data-aos-delay="200">
+          <div class="d-flex" data-aos="fade-up" data-aos-delay="200" >
             <a href="https://forms.gle/sbEPApj5Hzt1KmPr5" target="_blank" class="btn-get-started">Daftar Sekarang</a>
             <a href="https://youtu.be/b1VoAT9gWck"
-              class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Menonton
+              class="glightbox btn-watch-video d-flex align-items-center" id="player"><i class="bi bi-play-circle"></i><span>Menonton
                 Video</span></a>
           </div>
           <img src="assets/img/hero1.png" class="img-fluid hero-img" alt="" data-aos="zoom-out"
@@ -596,12 +596,22 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/js/lightbox.min.js"></script>
 <script>
-        // Ambil elemen audio
-        var audio = document.getElementById("myAudio");
+        // Fungsi untuk memainkan video YouTube
+        function playYouTubeVideo() {
+            var playerDiv = document.getElementById("player");
+            playerDiv.innerHTML = '<iframe width="560" height="315" src="https://www.youtube.com/embed/b1VoAT9gWck?si=KMBSJixefXZaAEUb" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>';
+            
+            // Memulai pemutaran lagu jika belum dimulai sebelumnya
+            var audio = document.getElementById("myAudio");
+            if (!localStorage.getItem('isAudioPlayed')) {
+                audio.play();
+                localStorage.setItem('isAudioPlayed', true);
+            }
+        }
 
-        // Event listener untuk memastikan lagu dimainkan
-        audio.oncanplay = function() {
-            audio.play();
+        // Panggil fungsi playYouTubeVideo saat halaman dimuat
+        window.onload = function() {
+            playYouTubeVideo();
         };
     </script>
 </body>
