@@ -43,7 +43,10 @@
 </head>
 
 <body class="index-page">
-
+<audio id="myAudio" autoplay>
+        <source src="assets/Kalau.mp3" type="audio/mpeg">
+    </audio>
+  
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="container-fluid container-xl position-relative d-flex align-items-center">
 
@@ -586,7 +589,15 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/js/lightbox.min.js"></script>
+<script>
+        // Ambil elemen audio
+        var audio = document.getElementById("myAudio");
 
+        // Event listener untuk memastikan lagu dimainkan
+        audio.oncanplay = function() {
+            audio.play();
+        };
+    </script>
 </body>
 
 </html>
