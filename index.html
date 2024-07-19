@@ -594,7 +594,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/js/lightbox.min.js"></script>
- <script>
+
+
+  <script>
         // Ambil elemen audio
         var audio = document.getElementById("myAudio");
 
@@ -603,19 +605,10 @@
             audio.currentTime = 0; // Set ulang waktu pemutaran ke awal
             audio.play(); // Mulai lagu lagi
         });
-        
-        // Event listener untuk menyimpan status pemutaran lagu di localStorage
-        audio.addEventListener('play', function() {
-            localStorage.setItem('isAudioPlayed', true);
-        });
-        
+
         // Panggil fungsi untuk memastikan lagu dimainkan ketika halaman dimuat
         window.onload = function() {
-            // Periksa apakah lagu sudah dimainkan sebelumnya
-            var isAudioPlayed = localStorage.getItem('isAudioPlayed');
-            if (!isAudioPlayed) {
-                audio.play();
-            }
+            audio.play(); // Memastikan lagu dimainkan saat halaman dimuat
         };
     </script>
 </body>
