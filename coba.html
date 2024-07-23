@@ -3,40 +3,70 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Form Pencarian dengan Data Dummy</title>
+  <title>Repository Buku</title>
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
   <style>
     .form-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
+      padding-top: 50px;
+      padding-bottom: 50px;
     }
-    .form-container form {
-      text-align: center;
+    .navbar-brand {
+      font-size: 1.5rem;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Repository Buku</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Beranda</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Tentang Kami</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Kontak</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Search Form -->
   <div class="container form-container">
     <div class="row justify-content-center">
       <div class="col-md-8">
-        <div class="card text-center">
-          <div class="card-header bg-primary text-white">
-            <h4 class="card-title">Form Pencarian</h4>
+        <div class="card">
+          <div class="card-header bg-primary text-white text-center">
+            <h4 class="card-title">Cari Buku</h4>
           </div>
           <div class="card-body">
             <form id="searchForm">
               <div class="mb-3">
-                <label for="search" class="form-label">Cari</label>
-                <input type="text" class="form-control" id="search" placeholder="Masukkan kata kunci pencarian">
+                <input type="text" class="form-control" id="search" placeholder="Masukkan judul buku">
               </div>
               <button type="submit" class="btn btn-primary">Cari</button>
             </form>
           </div>
         </div>
-        <div class="card text-center mt-4" id="resultCard">
-          <div class="card-header bg-success text-white">
+      </div>
+    </div>
+  </div>
+
+  <!-- Search Results -->
+  <div class="container mt-4">
+    <div class="row">
+      <div class="col">
+        <div class="card">
+          <div class="card-header bg-success text-white text-center">
             <h4 class="card-title">Hasil Pencarian</h4>
           </div>
           <div class="card-body">
@@ -44,7 +74,8 @@
               <thead>
                 <tr>
                   <th>No</th>
-                  <th>Nama</th>
+                  <th>Judul</th>
+                  <th>Penulis</th>
                   <th>Deskripsi</th>
                 </tr>
               </thead>
@@ -61,28 +92,39 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
   <script>
     const dummyData = [
-      { id: 1, name: 'Produk 1', description: 'Deskripsi produk 1' },
-      { id: 2, name: 'Produk 2', description: 'Deskripsi produk 2' },
-      { id: 3, name: 'Produk 3', description: 'Deskripsi produk 3' },
-      // Tambahkan data dummy sesuai kebutuhan
+      { id: 1, title: 'Buku 1', author: 'Penulis 1', description: 'Deskripsi buku 1' },
+      { id: 2, title: 'Buku 2', author: 'Penulis 2', description: 'Deskripsi buku 2' },
+      { id: 3, title: 'Buku 3', author: 'Penulis 3', description: 'Deskripsi buku 3' },
+      // Tambahkan data buku sesuai kebutuhan
     ];
 
     document.getElementById('searchForm').addEventListener('submit', function(event) {
       event.preventDefault();
       const searchText = document.getElementById('search').value.toLowerCase();
-      const filteredData = dummyData.filter(item => item.name.toLowerCase().includes(searchText));
+      const filteredData = dummyData.filter(item => item.title.toLowerCase().includes(searchText));
       const resultTableBody = document.getElementById('resultTableBody');
 
       resultTableBody.innerHTML = ''; // Kosongkan tabel sebelum menambahkan hasil baru
       if (filteredData.length > 0) {
         filteredData.forEach(item => {
           const row = document.createElement('tr');
-          row.innerHTML = `<td>${item.id}</td><td>${item.name}</td><td>${item.description}</td>`;
+          row.innerHTML = `<td>${item.id}</td><td>${item.title}</td><td>${item.author}</td><td>${item.description}</td>`;
           resultTableBody.appendChild(row);
         });
       } else {
-        resultTableBody.innerHTML = '<tr><td colspan="3">Tidak ada hasil ditemukan</td></tr>';
+        resultTableBody.innerHTML = '<tr><td colspan="4">Tidak ada hasil ditemukan</td></tr>';
       }
     });
 
-    //
+    // Tampilkan semua data pada awal
+    window.onload = function() {
+      const resultTableBody = document.getElementById('resultTableBody');
+      dummyData.forEach(item => {
+        const row = document.createElement('tr');
+        row.innerHTML = `<td>${item.id}</td><td>${item.title}</td><td>${item.author}</td><td>${item.description}</td>`;
+        resultTableBody.appendChild(row);
+      });
+    };
+  </script>
+</body>
+</html>
