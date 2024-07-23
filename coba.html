@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Form Pencarian</title>
+  <title>Form Pencarian dengan Data Dummy</title>
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
   <div class="container mt-5">
     <div class="row justify-content-center">
-      <div class="col-md-6">
+      <div class="col-md-8">
         <div class="card text-center">
           <div class="card-header bg-primary text-white">
             <h4 class="card-title">Form Pencarian</h4>
@@ -29,7 +29,18 @@
             <h4 class="card-title">Hasil Pencarian</h4>
           </div>
           <div class="card-body">
-            <p id="resultText"></p>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>No</th>
+                  <th>Nama</th>
+                  <th>Deskripsi</th>
+                </tr>
+              </thead>
+              <tbody id="resultTableBody">
+                <!-- Hasil pencarian akan muncul di sini -->
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
@@ -38,11 +49,31 @@
 
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
   <script>
+    const dummyData = [
+      { id: 1, name: 'Produk 1', description: 'Deskripsi produk 1' },
+      { id: 2, name: 'Produk 2', description: 'Deskripsi produk 2' },
+      { id: 3, name: 'Produk 3', description: 'Deskripsi produk 3' },
+      // Tambahkan data dummy sesuai kebutuhan
+    ];
+
     document.getElementById('searchForm').addEventListener('submit', function(event) {
       event.preventDefault();
-      const searchText = document.getElementById('search').value;
-      document.getElementById('resultText').innerText = `Anda mencari: "${searchText}"`;
-      document.getElementById('resultCard').style.display = 'block';
+      const searchText = document.getElementById('search').value.toLowerCase();
+      const filteredData = dummyData.filter(item => item.name.toLowerCase().includes(searchText));
+      const resultTableBody = document.getElementById('resultTableBody');
+
+      resultTableBody.innerHTML = ''; // Kosongkan tabel sebelum menambahkan hasil baru
+      if (filteredData.length > 0) {
+        filteredData.forEach(item => {
+          const row = document.createElement('tr');
+          row.innerHTML = `<td>${item.id}</td><td>${item.name}</td><td>${item.description}</td>`;
+          resultTableBody.appendChild(row);
+        });
+        document.getElementById('resultCard').style.display = 'block';
+      } else {
+        resultTableBody.innerHTML = '<tr><td colspan="3">Tidak ada hasil ditemukan</td></tr>';
+        document.getElementById('resultCard').style.display = 'block';
+      }
     });
   </script>
 </body>
