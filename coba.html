@@ -10,20 +10,26 @@
   <div class="container mt-5">
     <div class="row justify-content-center">
       <div class="col-md-6">
-        <div class="card">
+        <div class="card text-center">
           <div class="card-header bg-primary text-white">
-            <h4 class="card-title text-center">Form Pencarian</h4>
+            <h4 class="card-title">Form Pencarian</h4>
           </div>
           <div class="card-body">
-            <form>
+            <form id="searchForm">
               <div class="mb-3">
                 <label for="search" class="form-label">Cari</label>
                 <input type="text" class="form-control" id="search" placeholder="Masukkan kata kunci pencarian">
               </div>
-              <div class="d-grid gap-2">
-                <button type="submit" class="btn btn-primary">Cari</button>
-              </div>
+              <button type="submit" class="btn btn-primary">Cari</button>
             </form>
+          </div>
+        </div>
+        <div class="card text-center mt-4" id="resultCard" style="display: none;">
+          <div class="card-header bg-success text-white">
+            <h4 class="card-title">Hasil Pencarian</h4>
+          </div>
+          <div class="card-body">
+            <p id="resultText"></p>
           </div>
         </div>
       </div>
@@ -31,5 +37,13 @@
   </div>
 
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.getElementById('searchForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const searchText = document.getElementById('search').value;
+      document.getElementById('resultText').innerText = `Anda mencari: "${searchText}"`;
+      document.getElementById('resultCard').style.display = 'block';
+    });
+  </script>
 </body>
 </html>
